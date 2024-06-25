@@ -8,7 +8,7 @@ import os
 import numpy as np
 import glob
 import pytesseract
-
+from openbharatocr.ocr.aadhaar import extract_aadhaar, extract_dob, extract_name, extract_gender, extract_address, extract_fathers_name
 # Load the YOLOv8 model
 model = YOLO('aadhaar.pt')
 
@@ -64,8 +64,22 @@ def detect_and_crop(image_url, model, output_dir='./tmp'):
             
             try:
                 # Perform OCR on the cropped image
-                ocr_result = pytesseract.image_to_string(output_path, lang='eng+ces', config='--psm 1')
+                custom_config = r'--oem 3 --psm 6'
+                ocr_result = pytesseract.image_to_string(output_path, lang='eng', config=custom_config).strip()
+                if label == "aadharNo":
+                    ocr_result = extract_aadhaar(ocr_result)
+                
+                if label == "name":
+                    ocr_result = extract_name(ocr_result)
+                
+                if label == "fathersName":
+                    ocr_result = extract_fathers_name(ocr_result)
+                
+                if label == "dob":
+                    ocr_result = extract_dob(ocr_result)
+                
                 extracted_data[label] = ocr_result.replace('\n', ' ')
+                print(f"OCR result for {label}: {ocr_result}")
             except pytesseract.TesseractError as e:
                 print(f"Error during OCR for {output_path}: {e}")
                 error_message = e.stderr.decode('utf-8', errors='ignore')
