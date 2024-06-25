@@ -67,7 +67,7 @@ def detect_and_crop(image_url, model, output_dir='./tmp'):
                 custom_config = r'--oem 3 --psm 6'
                 ocr_result = pytesseract.image_to_string(output_path, lang='eng', config=custom_config).strip()
                 if label == "aadharNo":
-                    ocr_result = extract_aadhaar(ocr_result)
+                    ocr_result = extract_aadhaar(ocr_result).replace(' ', '')
                 
                 if label == "name":
                     ocr_result = extract_name(ocr_result)
