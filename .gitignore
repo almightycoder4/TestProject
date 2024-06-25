@@ -1,0 +1,17 @@
+*.png
+*.jpg
+*.jpeg
+*.ipynb_checkpoints
+*.ipynb
+*.pb
+*.json
+*.csv
+*/*.h5
+*/*.*.hdf5
+logs_127
+sample
+SynthImageDataset
+Test_data
+Val_data
+__pycache__
+env
