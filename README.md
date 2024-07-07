@@ -16,7 +16,7 @@
 
 ## API
 
-### `/aadhaarOcr`
+### `/ocrAdhaar`
 
 - **Method**: POST
 - **Description**: Perform OCR on Aadhaar card image.
