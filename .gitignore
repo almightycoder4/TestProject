@@ -2,7 +2,7 @@ env
 __pycache__
 unit_tests
 tmp
-.png
+*.png
 *.jpeg
 *.jpg
 .DS_Store
