@@ -1,0 +1,13 @@
+env
+__pycache__
+unit_tests
+tmp
+.png
+*.jpeg
+*.jpg
+.DS_Store
+*.csv
+*.txt
+*.xlsx
+.env
+openbharatocr
