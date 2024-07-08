@@ -53,7 +53,7 @@ def ocrAdhaar(mode, session):
             return jsonify({"error": "Invalid image format. Only JPG and PNG are supported."}), 400
 
         # Run detection
-        model = current_app.model
+        model = current_app.models.get('adhaarModel')
         results = model.predict(source=img, save=False)
         extracted_data = process_results(results, img)
         
