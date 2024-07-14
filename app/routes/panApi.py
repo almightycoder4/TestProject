@@ -4,11 +4,11 @@ from PIL import Image, UnidentifiedImageError
 from io import BytesIO
 import base64
 import requests
-from services.adhaarServices.ocr import process_results
+from  ..services.panServices.panOcr import process_results
 import io
-def ocr_pan(mode, session):
+def ocrPan(mode, session):
     try:
-        print("API HIT ************* AADHAAROCR")
+        print("API HIT ************* PANOCR")
         data = request.get_json()
         if not data:
             return jsonify({"error": "Invalid request payload"}), 400
@@ -51,9 +51,9 @@ def ocr_pan(mode, session):
         # Check image format
         if img.format not in ['JPEG', 'JPG', 'PNG']:
             return jsonify({"error": "Invalid image format. Only JPG and PNG are supported."}), 400
-
+        
         # Run detection
-        model = current_app.model
+        model = current_app.models.get('panModel')
         results = model.predict(source=img, save=False)
         extracted_data = process_results(results, img)
         

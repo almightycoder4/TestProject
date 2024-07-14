@@ -23,11 +23,16 @@ def center_on_white_background(image):
 
 def all_cropped_images_to_one_image(cropped_images, separator_image_path):
     separator_image = Image.open(separator_image_path)
-    separator_width = separator_image.width
+    separator_width = separator_image.width    
     total_width = sum(img.width for img in cropped_images) + (len(cropped_images) - 1) * separator_width
+    print("Total Width:", total_width)
+    
     max_height = max(max(img.height for img in cropped_images), separator_image.height)
+    print("Max Height:", max_height)
+    
     combined_image = Image.new('RGB', (total_width, max_height))
     x = 0
+    print(cropped_images, "before combine")
     for i, img in enumerate(cropped_images):
         combined_image.paste(img, (x, 0))
         x += img.width
