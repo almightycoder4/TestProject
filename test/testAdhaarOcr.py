@@ -11,7 +11,7 @@ if mode == 'prod':
     exit()
 image_folder = './aadhar.v4i.tensorflow/test'
 upload_api_endpoint = 'https://api.imgbb.com/1/upload'
-ocr_api_endpoint = 'http://192.168.1.12:3100/ocrAdhaar'
+ocr_api_endpoint = 'https://pawanmau01-testapi.hf.space/ocrAdhaar'
 excel_file = 'Test_ResultAdhaar.xlsx'
 
 
@@ -45,7 +45,7 @@ print(f"There are {total_images} images in your test folder.")
 # Step 2: Upload images and store URLs
 print("Uploading started...")
 uploaded_count = 0
-maxUpload = 1
+maxUpload = 20
 for image_name in image_files:
     if uploaded_count >= maxUpload:
         break
