@@ -2,7 +2,7 @@ from io import BytesIO
 from ...utils.azureOCR import analyze_image
 from ...utils.imageUtils import resize_if_needed, all_cropped_images_to_one_image
 from .panDataExtractor import extract_panData
-from collections import defaultdict
+# from collections import defaultdict
 
 def process_results(results, img):
     label_indices = {"pan_num": 0, "name": 1, "father": 2, "dob": 3}
