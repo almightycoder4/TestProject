@@ -55,7 +55,9 @@ def ocrPan(mode, session):
         # Run detection
         model = current_app.models.get('panModel')
         results = model.predict(source=img, save=False)
+        # print(results,"model result")
         extracted_data = process_results(results, img)
+        # print(extracted_data, "extracted data")
         
         if extracted_data.get('statusCode') == 400:
             return jsonify(extracted_data), 400
@@ -67,4 +69,4 @@ def ocrPan(mode, session):
         return jsonify({"error": "Unable to identify image format."}), 400
     except Exception as e:
         current_app.logger.error(f"Unexpected error: {str(e)}")
-        return jsonify({"error": "An unexpected error occurred."}), 500
+        return jsonify({"error": "An unexpected error occurred on api call."}), 500

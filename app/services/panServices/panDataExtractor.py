@@ -1,7 +1,8 @@
 import re
 
 def extract_panData(data):
-    unwanted_words = ["Name","/Name", "Date of Birth", "/Date of Birth", "Permanent Account Number", "Father's Name", "14 /Name", "/Father's Name"]
+    unwanted_words = ["Name","/Name",'Permanent', 'Account', 'Number', 'Card', 'नाम', '/Name',
+        "पिता का नाम",'नाम / Name', "पिता का नाम/ Father's Name", 'नाम /Name',"पिता का नाम / Father's Name", 'जन्म का वाराज़', 'Date of Birth', 'Permanent Account Number Card', "Date of Birth", "/Date of Birth", "Permanent Account Number", "Father's Name", "14 /Name", "/Father's Name"]
     
     # Clean the array by removing unwanted words and invalid entries
     cleaned_data = []
@@ -24,30 +25,30 @@ def extract_panData(data):
     }
     
     # Check and extract PAN number
-    print(cleaned_data)
+    print(cleaned_data, "cleaned data")
     pan_pattern = re.compile(r'^[A-Z]{5}[0-9]{4}[A-Z]$')
-    if len(cleaned_data) > 0 and pan_pattern.match(cleaned_data[3]):
-        result["data"]["panNo"] = cleaned_data[3]
+    if len(cleaned_data) > 0 and pan_pattern.match(cleaned_data[0]):
+        result["data"]["panNo"] = cleaned_data[0]
     else:
         result["data"]["panNo"] = ''
         
     # Check and extract name
     name_pattern = re.compile(r'^[A-Za-z .]+$')
-    if len(cleaned_data) > 1 and name_pattern.match(cleaned_data[2]):
-        result["data"]["name"] = cleaned_data[2]
+    if len(cleaned_data) > 1 and name_pattern.match(cleaned_data[1]):
+        result["data"]["name"] = cleaned_data[1]
     else:
         result["data"]["name"] = ''
         
     # Check and extract father's name
-    if len(cleaned_data) > 2 and name_pattern.match(cleaned_data[1]):
-        result["data"]["fatherName"] = cleaned_data[1]
+    if len(cleaned_data) > 2 and name_pattern.match(cleaned_data[2]):
+        result["data"]["fatherName"] = cleaned_data[2]
     else:
         result["data"]["fatherName"] = ''
         
     # Check and extract date of birth
     dob_pattern = re.compile(r'^\d{2}[-/]\d{2}[-/]\d{4}$')
-    if len(cleaned_data) > 3 and dob_pattern.match(cleaned_data[0]):
-        result["data"]["dob"] = cleaned_data[0]
+    if len(cleaned_data) > 3 and dob_pattern.match(cleaned_data[3]):
+        result["data"]["dob"] = cleaned_data[3]
     else:
         result["data"]["dob"] = ''
     
