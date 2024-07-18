@@ -9,7 +9,7 @@ mode = os.getenv('PROJECT_MODE')
 if mode == 'prod':
     print("Testing is not allowed in production mode. Please change Project Mode key to:'dev' and reopen terminal to run test.")
     exit()
-image_folder = './testPan'
+image_folder = '../../../Retrain Pan Image'
 upload_api_endpoint = 'https://api.imgbb.com/1/upload'
 ocr_api_endpoint = 'https://pawanmau01-testapi.hf.space/ocrPan'
 excel_file = 'Test_ResultPan.xlsx'
@@ -44,7 +44,7 @@ print(f"There are {total_images} images in your test folder.")
 # Step 2: Upload images and store URLs
 print("Uploading started...")
 uploaded_count = 0
-maxUpload = 40
+maxUpload = 15
 for image_name in image_files:
     if uploaded_count >= maxUpload:
         break
