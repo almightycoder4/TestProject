@@ -7,13 +7,12 @@ from openpyxl.styles import PatternFill
 # Configuration
 mode = os.getenv('PROJECT_MODE')
 if mode == 'prod':
-    print("Testing is not allowed in production mode. Please chage Project Mode key to:'dev' and reopen terminal to run test.")
+    print("Testing is not allowed in production mode. Please change Project Mode key to:'dev' and reopen terminal to run test.")
     exit()
 image_folder = './testPan'
 upload_api_endpoint = 'https://api.imgbb.com/1/upload'
 ocr_api_endpoint = 'https://pawanmau01-testapi.hf.space/ocrPan'
 excel_file = 'Test_ResultPan.xlsx'
-
 
 upload_params = {
     'key': '898b7b839ae4b0dbc0af3d392816c73e',
@@ -38,14 +37,14 @@ ws.column_dimensions['C'].width = pixels_to_column_width(500)
 wb.save(excel_file)
 
 # Get total number of images
-image_files = [f for f in os.listdir(image_folder) if os.path.isfile(os.path.join(image_folder, f))]
+image_files = [f for f in os.listdir(image_folder) if os.path.isfile(os.path.join(image_folder, f)) and f.lower().endswith(('.png', '.jpg', '.jpeg', '.gif', '.bmp', '.tiff'))]
 total_images = len(image_files)
 print(f"There are {total_images} images in your test folder.")
 
 # Step 2: Upload images and store URLs
 print("Uploading started...")
 uploaded_count = 0
-maxUpload = 20
+maxUpload = 40
 for image_name in image_files:
     if uploaded_count >= maxUpload:
         break
@@ -111,21 +110,16 @@ for row in range(2, ws.max_row + 1):
                 ocr_result = response.json()
             else:
                 print(f"Error generating OCR for {image_url}: {response.status_code} - {response.text}")
-                # Handle the error or set a default value
                 ocr_result = response.json()
                 ws.cell(row=row, column=3).fill = red_fill
         except Exception as e:
             print(f"Error generating OCR for {image_url}: {str(e)}")
-            # Handle the error or set a default value
             ocr_result = f'Error during generating ocr_result: {str(e)}'
             ws.cell(row=row, column=3).fill = red_fill
     else:
         print(f"Skipping URL: {image_url}")
-        # Handle the error or set a default value
         ocr_result = 'Error during generating ocr_result'
         ws.cell(row=row, column=3).fill = red_fill
-        
-    
     # Update OCR result in Excel
     ws.cell(row=row, column=3, value=str(ocr_result))
     wb.save(excel_file)

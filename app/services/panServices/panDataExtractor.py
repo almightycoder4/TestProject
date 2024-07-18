@@ -2,7 +2,7 @@ import re
 
 def extract_panData(data):
     unwanted_words = ["Name","/Name",'Permanent', 'Account', 'Number', 'Card', 'नाम', '/Name',
-        "पिता का नाम",'नाम / Name', "पिता का नाम/ Father's Name", "पिता का नाम/ Father's Nam", 'नाम /Name',"पिता का नाम / Father's Name", 'जन्म का वाराज़', 'Date of Birth', 'Permanent Account Number Card', "Date of Birth", "/Date of Birth", "Permanent Account Number", "Father's Name", "14 /Name", "/Father's Name"]
+        "पिता का नाम",'नाम / Name', "पिता का नाम/ Father's Name", '414 / Name', 'पिता का नाम / Fath',"VIT VE Hra / Father's Nama", 'पिता का नाम/ Fal', 'पिता का नाम / Fathe',"पिता का नाम / Father's Na", 'जन्म की तारीख /।', 'जन्म का ताराख', "पिता का नाम/ Father's Nam", 'नाम /Name',"पिता का नाम / Father's Name", 'जन्म का वाराज़', 'Date of Birth', 'Permanent Account Number Card', "Date of Birth", "/Date of Birth", "Permanent Account Number", "Father's Name", "14 /Name", "/Father's Name"]
     
     # Clean the array by removing unwanted words and invalid entries
     cleaned_data = []
