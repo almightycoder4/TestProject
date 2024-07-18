@@ -6,7 +6,7 @@ from collections import defaultdict
 
 def process_results(results, img):
     label_indices = {"pan_num": 0, "name": 1, "father": 2, "dob": 3}
-    confidence_threshold = 0.5
+    confidence_threshold = 0.3
     input_image_format = img.format if img.format else "PNG"
     valid_formats = ["JPEG", "PNG", "BMP", "GIF", "TIFF"]
     input_image_format = input_image_format if input_image_format in valid_formats else "PNG"
