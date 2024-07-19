@@ -28,6 +28,7 @@ def ocrPan(mode, session):
                 img_data = base64.b64decode(imgBuffer)
                 img = Image.open(BytesIO(img_data))
                 img.verify()  # Verify image format
+                print(img, "img")
                 img = Image.open(io.BytesIO(img_data))  # Re-open image after verification
             except (base64.binascii.Error, ValueError) as decode_err:
                 return jsonify({"error": f"Image decoding failed: {str(decode_err)}"}), 400
@@ -42,6 +43,7 @@ def ocrPan(mode, session):
             response = session.get(img_url)
             response.raise_for_status()
             img = Image.open(BytesIO(response.content))
+            print(img, "img")
             img.verify()  # Verify image format
             img = Image.open(BytesIO(response.content))  # Re-open image after verification
 
@@ -54,7 +56,7 @@ def ocrPan(mode, session):
         
         # Run detection
         model = current_app.models.get('panModel')
-        results = model.predict(source=img, save=False)
+        results = model.predict(source=img, imgsz=680, iou=0.7, augment=True)
         # print(results,"model result")
         extracted_data = process_results(results, img)
         # print(extracted_data, "extracted data")

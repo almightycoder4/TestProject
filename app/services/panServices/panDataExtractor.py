@@ -3,14 +3,14 @@ def filter_array(arr):
     # Define the regex patterns
     pattern_alphanumeric_special = re.compile(r'[\w]+[^.\s\w]+|[^.\s\w]+[\w]+')
     pattern_numeric = re.compile(r'^[0-9]+$')
-    pattern_non_alpha = re.compile(r'[^.\s]*[^a-zA-Z\s][^.\s]*')
+    pattern_special_chars = re.compile(r'[^a-zA-Z.\s]+')
     
     # Filter the array
     filtered_array = [
         item for item in arr 
         if not (pattern_alphanumeric_special.search(item) or 
                 pattern_numeric.match(item) or 
-                pattern_non_alpha.search(item))
+                pattern_special_chars.search(item))
     ]
     return filtered_array
 
@@ -20,7 +20,8 @@ def extract_panData(data):
                       "VIT VE Hra / Father's Nama", 'पिता का नाम/ Fal', 'पिता का नाम / Fathe', "पिता का नाम / Father's Na", 
                       'जन्म की तारीख /।', 'जन्म का ताराख', "पिता का नाम/ Father's Nam", 'नाम /Name', "पिता का नाम / Father's Name", 
                       'जन्म का वाराज़', 'Date of Birth', 'Permanent Account Number Card', "Date of Birth", "/Date of Birth", 
-                      "Permanent Account Number", "Father's Name", "14 /Name", "/Father's Name", 'HTH / Name']
+                      "Permanent Account Number", "Father's Name", "14 /Name", "/Father's Name", 'HTH / Name',"inent Account Number", "anent Account Number C","Permanent Account Number Car",
+                      'ugr Name']
     
 
     
@@ -47,7 +48,7 @@ def extract_panData(data):
     
    
     # Check and extract PAN number
-    pan_pattern = re.compile(r'^[A-Z]{5}[0-9]{4}[A-Z]$')
+    pan_pattern = re.compile(r'^[A-Z]{5}\s*[0-9]{4}\s*[A-Z]$')
     for item in cleaned_data:
         if pan_pattern.match(item):
             result["data"]["panNo"] = item
