@@ -10,7 +10,7 @@ def create_app():
         # Load model once
         app.models = {
             'adhaarModel': YOLO('models/aadhaarYolov8.pt'),
-            'panModel': YOLO('models/PanModel_v5.pt')  # Load additional models as needed
+            'panModel': YOLO('models/PanModel_v6.pt')  # Load additional models as needed
         }
 
     return app
