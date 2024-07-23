@@ -12,7 +12,7 @@ if mode == 'prod':
     exit()
 
 image_folder = '../../../TestPan2'
-ocr_api_endpoint = 'http://192.168.1.13:3100/ocrPan'
+ocr_api_endpoint = 'https://pawanmau01-testapi.hf.space/ocrPan'
 excel_file = 'Test_ResultPan.xlsx'
 red_fill = PatternFill(start_color='FFC7CE', end_color='FFC7CE', fill_type='solid')
 max_upload = 100
